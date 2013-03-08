@@ -11,25 +11,11 @@ namespace Bittiez.MYSQL_Saver
 
         public static void Initialize()
         {
-            CommandSystem.Register("[testmy", AccessLevel.Seer, new CommandEventHandler(MySQLWrite_OnCommand));
             Console.Write("Mysql Write loaded.");
             Console.WriteLine();
         }
         [Usage("testmy [description]")]
         [Description("Attempts to save to mysql.")]
-        public static void MySQLWrite_OnCommand(CommandEventArgs e)
-        {
-            MySQLConData ConData = new MySQLConData();
-            MySQLWrite my = new MySQLWrite();
-
-            MySqlConnection con = ConData.Open_Connect(MySQLConData.db);
-            if (my.write(con, e.Mobile.Serial, e.ArgString, 1))
-                e.Mobile.SendMessage("Write successful");
-
-            ConData.Close_Connection(con);
-        }
-
-
         public bool write(MySqlConnection con, Serial serial, string String, int Identifier)
         {
             string type = "string", sql;

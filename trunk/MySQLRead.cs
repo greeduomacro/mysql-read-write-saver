@@ -4,7 +4,6 @@ using Server;
 using Server.Commands;
 using System.Net;
 
-
 namespace Bittiez.MYSQL_Saver
 {
     public class MySQLRead
@@ -12,27 +11,11 @@ namespace Bittiez.MYSQL_Saver
 
         public static void Initialize()
         {
-            CommandSystem.Register("[readmy", AccessLevel.Seer, new CommandEventHandler(MySQLRead_OnCommand));
             Console.Write("Mysql Read Loaded.");
             Console.WriteLine();
         }
         [Usage("readmy [description]")]
         [Description("Attempts to save to mysql.")]
-        public static void MySQLRead_OnCommand(CommandEventArgs e)
-        {
-            MySQLConData ConData = new MySQLConData();
-            MySQLRead my = new MySQLRead();
-
-            MySqlConnection con = ConData.Open_Connect(MySQLConData.db);
-
-            e.Mobile.SendMessage(my.readString(con, e.Mobile.Serial, e.ArgString, 1));
-
-            ConData.Close_Connection(con);
-
-            e.Mobile.SendMessage("Done.");
-        }
-
-
         public string readString(MySqlConnection con, Serial serial, string return_if_no_data, int Identifier)
         {
             string type = "string", sql, stringg = return_if_no_data;
