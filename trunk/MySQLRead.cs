@@ -41,7 +41,6 @@ namespace Bittiez.MYSQL_Saver
                 return return_if_no_data;
             }
         }
-
         public DateTime readDateTime(MySqlConnection con, Serial serial, DateTime return_if_no_data, int Identifier)
         {
             string type = "dateTime", sql;
@@ -66,7 +65,6 @@ namespace Bittiez.MYSQL_Saver
                 return return_if_no_data;
             }
         }
-
         public IPAddress readIPAddress(MySqlConnection con, Serial serial, IPAddress return_if_no_data, int Identifier)
         {
             string type = "ipaddress", sql;
@@ -91,7 +89,6 @@ namespace Bittiez.MYSQL_Saver
                 return return_if_no_data;
             }
         }
-
         public int readInt(MySqlConnection con, Serial serial, int return_if_no_data, int Identifier)
         {
             string type = "int", sql;
@@ -116,7 +113,6 @@ namespace Bittiez.MYSQL_Saver
                 return return_if_no_data;
             }
         }
-
         public TimeSpan readTimeSpan(MySqlConnection con, Serial serial, TimeSpan return_if_no_data, int Identifier)
         {
             string type = "timespan", sql;
@@ -141,7 +137,6 @@ namespace Bittiez.MYSQL_Saver
                 return return_if_no_data;
             }
         }
-
         public decimal readDecimal(MySqlConnection con, Serial serial, decimal return_if_no_data, int Identifier)
         {
             string type = "decimal", sql;
@@ -166,7 +161,6 @@ namespace Bittiez.MYSQL_Saver
                 return return_if_no_data;
             }
         }
-
         public long readLong(MySqlConnection con, Serial serial, long return_if_no_data, int Identifier)
         {
             string type = "long", sql;
@@ -188,6 +182,33 @@ namespace Bittiez.MYSQL_Saver
             catch (Exception ex)
             {
                 Console.WriteLine("Error: " + ex);
+                return return_if_no_data;
+            }
+        }
+        public uint readUint(MySqlConnection con, Serial serial, uint return_if_no_data, int Identifier)
+        {
+            string type = "uint", sql;
+            uint stringg = return_if_no_data;
+
+            try
+            {
+                sql = "SELECT * FROM `" + MySQLConData.database + "`.`" + type + "` WHERE Iden='" + Identifier + "' AND serial='" + serial.Value + "'";
+                MySqlCommand cmd = new MySqlCommand(sql, con);
+                MySqlDataReader dataReader = cmd.ExecuteReader();
+
+                if (dataReader.Read())
+                {
+                    
+                    stringg = Convert.ToUInt32((dataReader[type]));
+                    dataReader.Close();
+                }
+                return stringg;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine();
+                Console.WriteLine("Error: " + ex);
+                Console.WriteLine();
                 return return_if_no_data;
             }
         }
