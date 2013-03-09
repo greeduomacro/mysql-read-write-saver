@@ -234,5 +234,35 @@ namespace Bittiez.MYSQL_Saver
                 return false;
             }
         }
+        public bool write(MySqlConnection con, Serial serial, uint value, int Identifier)
+        {
+            string type = "uint", sql;
+            try
+            {
+                sql = "SELECT * FROM `" + MySQLConData.database + "`.`" + type + "` WHERE Iden='" + Identifier + "' AND serial='" + serial.Value + "'";
+                MySqlCommand cmd = new MySqlCommand(sql, con);
+                MySqlDataReader dataReader = cmd.ExecuteReader();
+
+                if (dataReader.Read())
+                {
+                    sql = "DELETE FROM `" + MySQLConData.database + "`.`" + type + "` WHERE Iden='" + Identifier + "' AND serial='" + serial.Value + "'";
+                    dataReader.Close();
+                    cmd = new MySqlCommand(sql, con);
+                    cmd.ExecuteNonQuery();
+                }
+                if (!dataReader.IsClosed) dataReader.Close();
+
+                sql = "INSERT INTO `" + MySQLConData.database + "`.`" + type + "` (`id`, `serial`, `" + type + "`, `Iden`) VALUES (NULL, '" + serial.Value + "', '" + value + "', '" + Identifier + "');";
+
+                cmd = new MySqlCommand(sql, con);
+                cmd.ExecuteNonQuery();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error: " + ex);
+                return false;
+            }
+        }
     }
 }

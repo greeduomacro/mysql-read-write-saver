@@ -23,6 +23,7 @@ namespace Server.Items
         private TimeSpan timespan;
         private decimal deCimal;
         private long loNg;
+        private uint uiNt;
 
         [Constructable]
         public Test_Item()
@@ -39,6 +40,7 @@ namespace Server.Items
             timespan = new TimeSpan(1);
             deCimal = (decimal)1.5;
             loNg = (long)123456789;
+            uiNt = (uint)123456;
         }
 
         public Test_Item(Serial serial)
@@ -51,7 +53,7 @@ namespace Server.Items
 
             base.GetProperties(list);
             list.Add(Test + " | " + dateTime.ToLongTimeString() + " | " + ipaddress.ToString() + " | " + Int + " | " + timespan.TotalSeconds + " | " + deCimal.ToString()
-                + " | " + loNg.ToString());
+                + " | " + loNg.ToString() + " | " + uiNt.ToString());
 
         }
 
@@ -69,6 +71,7 @@ namespace Server.Items
             timespan = new TimeSpan(random);
             deCimal = ((decimal)random / (decimal)77.3);
             loNg = (long)random;
+            uiNt = (uint)random;
             this.InvalidateProperties();
         }
 
@@ -91,6 +94,7 @@ namespace Server.Items
             MySqlWrite.write(con, this.Serial, timespan, 1); //Attempt to write a TimeSpan
             MySqlWrite.write(con, this.Serial, deCimal, 1); //Attempt to write a decimal
             MySqlWrite.write(con, this.Serial, loNg, 1); //Attempt to write a decimal
+            MySqlWrite.write(con, this.Serial, uiNt, 1); //Attempt to write a uint
             //Do other writes here before closing the connect. Also, all write functions return a boolean for success or failure
 
             ConData.Close_Connection(con); //Close connection after writing everything
@@ -117,6 +121,7 @@ namespace Server.Items
             timespan = MySqlRead.readTimeSpan(con, this.Serial, new TimeSpan(1), 1); //Attempt to read timespan
             deCimal = MySqlRead.readDecimal(con, this.Serial, (decimal)1.5, 1); //Read decimal
             loNg = MySqlRead.readLong(con, this.Serial, (long)1.5, 1); //Read long
+            uiNt = MySqlRead.readUint(con, this.Serial, (uint)1577, 1); //Read uint
 
             ConData.Close_Connection(con); //Close connection after reading everything
 
