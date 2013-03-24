@@ -46,7 +46,6 @@ namespace Bittiez.MYSQL_Saver
                 return false;
             }
         }
-
         public bool write(MySqlConnection con, Serial serial, DateTime dateTime, int Identifier)
         {
             string type = "dateTime", sql;
@@ -77,7 +76,6 @@ namespace Bittiez.MYSQL_Saver
                 return false;
             }
         }
-
         public bool write(MySqlConnection con, Serial serial, IPAddress value, int Identifier)
         {
             long data = Utility.GetLongAddressValue(value);
@@ -110,7 +108,6 @@ namespace Bittiez.MYSQL_Saver
                 return false;
             }
         }
-
         public bool write(MySqlConnection con, Serial serial, int value, int Identifier)
         {
             string type = "int", sql;
@@ -141,7 +138,6 @@ namespace Bittiez.MYSQL_Saver
                 return false;
             }
         }
-
         public bool write(MySqlConnection con, Serial serial, TimeSpan value, int Identifier)
         {
             string type = "timespan", sql;
@@ -172,7 +168,6 @@ namespace Bittiez.MYSQL_Saver
                 return false;
             }
         }
-
         public bool write(MySqlConnection con, Serial serial, decimal value, int Identifier)
         {
             string type = "decimal", sql;
@@ -203,7 +198,6 @@ namespace Bittiez.MYSQL_Saver
                 return false;
             }
         }
-
         public bool write(MySqlConnection con, Serial serial, long value, int Identifier)
         {
             string type = "long", sql;
@@ -264,5 +258,105 @@ namespace Bittiez.MYSQL_Saver
                 return false;
             }
         }
+        public bool write(MySqlConnection con, Serial serial, short value, int Identifier)
+        {
+            if (value > 32767)
+                value = 32767;
+            if (value < -32767)
+                value = -32767;
+
+            string type = "short", sql;
+            try
+            {
+                sql = "SELECT * FROM `" + MySQLConData.database + "`.`" + type + "` WHERE Iden='" + Identifier + "' AND serial='" + serial.Value + "'";
+                MySqlCommand cmd = new MySqlCommand(sql, con);
+                MySqlDataReader dataReader = cmd.ExecuteReader();
+
+                if (dataReader.Read())
+                {
+                    sql = "DELETE FROM `" + MySQLConData.database + "`.`" + type + "` WHERE Iden='" + Identifier + "' AND serial='" + serial.Value + "'";
+                    dataReader.Close();
+                    cmd = new MySqlCommand(sql, con);
+                    cmd.ExecuteNonQuery();
+                }
+                if (!dataReader.IsClosed) dataReader.Close();
+
+                sql = "INSERT INTO `" + MySQLConData.database + "`.`" + type + "` (`id`, `serial`, `" + type + "`, `Iden`) VALUES (NULL, '" + serial.Value + "', '" + value + "', '" + Identifier + "');";
+
+                cmd = new MySqlCommand(sql, con);
+                cmd.ExecuteNonQuery();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error: " + ex);
+                return false;
+            }
+        }
+        public bool write(MySqlConnection con, Serial serial, ushort value, int Identifier)
+        {
+            if (value > 65535)
+                value = 65535;
+            if (value < 0)
+                value = 0;
+            string type = "ushort", sql;
+            try
+            {
+                sql = "SELECT * FROM `" + MySQLConData.database + "`.`" + type + "` WHERE Iden='" + Identifier + "' AND serial='" + serial.Value + "'";
+                MySqlCommand cmd = new MySqlCommand(sql, con);
+                MySqlDataReader dataReader = cmd.ExecuteReader();
+
+                if (dataReader.Read())
+                {
+                    sql = "DELETE FROM `" + MySQLConData.database + "`.`" + type + "` WHERE Iden='" + Identifier + "' AND serial='" + serial.Value + "'";
+                    dataReader.Close();
+                    cmd = new MySqlCommand(sql, con);
+                    cmd.ExecuteNonQuery();
+                }
+                if (!dataReader.IsClosed) dataReader.Close();
+
+                sql = "INSERT INTO `" + MySQLConData.database + "`.`" + type + "` (`id`, `serial`, `" + type + "`, `Iden`) VALUES (NULL, '" + serial.Value + "', '" + value + "', '" + Identifier + "');";
+
+                cmd = new MySqlCommand(sql, con);
+                cmd.ExecuteNonQuery();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error: " + ex);
+                return false;
+            }
+        }
+        public bool write(MySqlConnection con, Serial serial, double value, int Identifier)
+        {
+            string type = "double", sql;
+            try
+            {
+                sql = "SELECT * FROM `" + MySQLConData.database + "`.`" + type + "` WHERE Iden='" + Identifier + "' AND serial='" + serial.Value + "'";
+                MySqlCommand cmd = new MySqlCommand(sql, con);
+                MySqlDataReader dataReader = cmd.ExecuteReader();
+
+                if (dataReader.Read())
+                {
+                    sql = "DELETE FROM `" + MySQLConData.database + "`.`" + type + "` WHERE Iden='" + Identifier + "' AND serial='" + serial.Value + "'";
+                    dataReader.Close();
+                    cmd = new MySqlCommand(sql, con);
+                    cmd.ExecuteNonQuery();
+                }
+                if (!dataReader.IsClosed) dataReader.Close();
+
+                sql = "INSERT INTO `" + MySQLConData.database + "`.`" + type + "` (`id`, `serial`, `" + type + "`, `Iden`) VALUES (NULL, '" + serial.Value + "', '" + value + "', '" + Identifier + "');";
+
+                cmd = new MySqlCommand(sql, con);
+                cmd.ExecuteNonQuery();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error: " + ex);
+                return false;
+            }
+        }
+
     }
 }
