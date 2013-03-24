@@ -24,6 +24,9 @@ namespace Server.Items
         private decimal deCimal;
         private long loNg;
         private uint uiNt;
+        private short shoRt;
+        private ushort ushoRt;
+        private double doubLe;
 
         [Constructable]
         public Test_Item()
@@ -41,6 +44,9 @@ namespace Server.Items
             deCimal = (decimal)1.5;
             loNg = (long)123456789;
             uiNt = (uint)123456;
+            shoRt = (short)123;
+            ushoRt = (ushort)7777;
+            doubLe = (double)100000;
         }
 
         public Test_Item(Serial serial)
@@ -52,8 +58,9 @@ namespace Server.Items
         {
 
             base.GetProperties(list);
-            list.Add(Test + " | " + dateTime.ToLongTimeString() + " | " + ipaddress.ToString() + " | " + Int + " | " + timespan.TotalSeconds + " | " + deCimal.ToString()
-                + " | " + loNg.ToString() + " | " + uiNt.ToString());
+            //list.Add(Test + " | " + dateTime.ToLongTimeString() + " | " + ipaddress.ToString() + " | " + Int + " | " + timespan.TotalSeconds + " | " + deCimal.ToString()
+            //    + " | " + loNg.ToString() + " | " + uiNt.ToString());
+            list.Add(shoRt + " | " + ushoRt + " | " + doubLe);
 
         }
 
@@ -72,6 +79,12 @@ namespace Server.Items
             deCimal = ((decimal)random / (decimal)77.3);
             loNg = (long)random;
             uiNt = (uint)random;
+            try { 
+                shoRt = Convert.ToInt16(ran.Next(5555));
+                ushoRt = Convert.ToUInt16(ran.Next(5555));
+                doubLe = Convert.ToDouble(random);
+            }
+            catch (Exception e) { }
             this.InvalidateProperties();
         }
 
@@ -95,6 +108,9 @@ namespace Server.Items
             MySqlWrite.write(con, this.Serial, deCimal, 1); //Attempt to write a decimal
             MySqlWrite.write(con, this.Serial, loNg, 1); //Attempt to write a decimal
             MySqlWrite.write(con, this.Serial, uiNt, 1); //Attempt to write a uint
+            MySqlWrite.write(con, this.Serial, shoRt, 1); //Attempt to write a short
+            MySqlWrite.write(con, this.Serial, ushoRt, 1); //Attempt to write a ushort
+            MySqlWrite.write(con, this.Serial, doubLe, 1); //Attempt to write a double
             //Do other writes here before closing the connect. Also, all write functions return a boolean for success or failure
 
             ConData.Close_Connection(con); //Close connection after writing everything
@@ -122,6 +138,9 @@ namespace Server.Items
             deCimal = MySqlRead.readDecimal(con, this.Serial, (decimal)1.5, 1); //Read decimal
             loNg = MySqlRead.readLong(con, this.Serial, (long)1.5, 1); //Read long
             uiNt = MySqlRead.readUint(con, this.Serial, (uint)1577, 1); //Read uint
+            shoRt = MySqlRead.readShort(con, this.Serial, (short)1577, 1); //Read short
+            ushoRt = MySqlRead.readUshort(con, this.Serial, (ushort)17, 1); //Read ushort
+            doubLe = MySqlRead.readDouble(con, this.Serial, (double)4098, 1); //Read double
 
             ConData.Close_Connection(con); //Close connection after reading everything
 

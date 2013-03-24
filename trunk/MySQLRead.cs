@@ -212,5 +212,80 @@ namespace Bittiez.MYSQL_Saver
                 return return_if_no_data;
             }
         }
+        public short readShort(MySqlConnection con, Serial serial, short return_if_no_data, int Identifier)
+        {
+            string type = "short", sql;
+            short stringg = return_if_no_data;
+
+            try
+            {
+                sql = "SELECT * FROM `" + MySQLConData.database + "`.`" + type + "` WHERE Iden='" + Identifier + "' AND serial='" + serial.Value + "'";
+                MySqlCommand cmd = new MySqlCommand(sql, con);
+                MySqlDataReader dataReader = cmd.ExecuteReader();
+
+                if (dataReader.Read())
+                {
+
+                    stringg = Convert.ToInt16((dataReader[type]));
+                    dataReader.Close();
+                }
+                return stringg;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error: " + ex);
+                return return_if_no_data;
+            }
+        }
+        public ushort readUshort(MySqlConnection con, Serial serial, ushort return_if_no_data, int Identifier)
+        {
+            string type = "ushort", sql;
+            ushort stringg = return_if_no_data;
+
+            try
+            {
+                sql = "SELECT * FROM `" + MySQLConData.database + "`.`" + type + "` WHERE Iden='" + Identifier + "' AND serial='" + serial.Value + "'";
+                MySqlCommand cmd = new MySqlCommand(sql, con);
+                MySqlDataReader dataReader = cmd.ExecuteReader();
+
+                if (dataReader.Read())
+                {
+
+                    stringg = Convert.ToUInt16((dataReader[type]));
+                    dataReader.Close();
+                }
+                return stringg;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error: " + ex);
+                return return_if_no_data;
+            }
+        }
+        public double readDouble(MySqlConnection con, Serial serial, double return_if_no_data, int Identifier)
+        {
+            string type = "double", sql;
+            double stringg = return_if_no_data;
+
+            try
+            {
+                sql = "SELECT * FROM `" + MySQLConData.database + "`.`" + type + "` WHERE Iden='" + Identifier + "' AND serial='" + serial.Value + "'";
+                MySqlCommand cmd = new MySqlCommand(sql, con);
+                MySqlDataReader dataReader = cmd.ExecuteReader();
+
+                if (dataReader.Read())
+                {
+
+                    stringg = Convert.ToDouble(dataReader[type]);
+                    dataReader.Close();
+                }
+                return stringg;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error: " + ex);
+                return return_if_no_data;
+            }
+        }
     }
 }

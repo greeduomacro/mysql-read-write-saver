@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Mar 09, 2013 at 03:10 PM
+-- Generation Time: Mar 24, 2013 at 12:40 PM
 -- Server version: 5.6.10
 -- PHP Version: 5.3.10
 
@@ -32,7 +32,7 @@ CREATE TABLE IF NOT EXISTS `datetime` (
   `dateTime` bigint(20) NOT NULL,
   `Iden` int(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=58 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=74 ;
 
 -- --------------------------------------------------------
 
@@ -46,7 +46,21 @@ CREATE TABLE IF NOT EXISTS `decimal` (
   `decimal` decimal(65,30) NOT NULL,
   `Iden` int(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=24 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `double`
+--
+
+CREATE TABLE IF NOT EXISTS `double` (
+  `id` int(255) NOT NULL AUTO_INCREMENT,
+  `serial` int(255) NOT NULL,
+  `double` decimal(65,30) NOT NULL,
+  `Iden` int(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
 -- --------------------------------------------------------
 
@@ -60,7 +74,7 @@ CREATE TABLE IF NOT EXISTS `int` (
   `int` int(255) NOT NULL,
   `Iden` int(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=21 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=37 ;
 
 -- --------------------------------------------------------
 
@@ -74,7 +88,7 @@ CREATE TABLE IF NOT EXISTS `ipaddress` (
   `ipaddress` bigint(20) NOT NULL,
   `Iden` int(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=23 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=39 ;
 
 -- --------------------------------------------------------
 
@@ -88,7 +102,21 @@ CREATE TABLE IF NOT EXISTS `long` (
   `long` bigint(40) NOT NULL,
   `Iden` int(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=22 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `short`
+--
+
+CREATE TABLE IF NOT EXISTS `short` (
+  `id` int(255) NOT NULL AUTO_INCREMENT,
+  `serial` int(255) NOT NULL,
+  `short` int(255) NOT NULL,
+  `Iden` int(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
 
 -- --------------------------------------------------------
 
@@ -102,7 +130,7 @@ CREATE TABLE IF NOT EXISTS `string` (
   `string` longtext NOT NULL,
   `Iden` int(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=58 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=74 ;
 
 -- --------------------------------------------------------
 
@@ -116,7 +144,7 @@ CREATE TABLE IF NOT EXISTS `timespan` (
   `timespan` bigint(20) NOT NULL,
   `Iden` int(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=19 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=35 ;
 
 -- --------------------------------------------------------
 
@@ -130,7 +158,21 @@ CREATE TABLE IF NOT EXISTS `uint` (
   `uint` bigint(40) NOT NULL,
   `Iden` int(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=19 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ushort`
+--
+
+CREATE TABLE IF NOT EXISTS `ushort` (
+  `id` int(255) NOT NULL AUTO_INCREMENT,
+  `serial` int(255) NOT NULL,
+  `ushort` int(255) NOT NULL,
+  `Iden` int(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
